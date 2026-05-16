@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Mail, Globe } from 'lucide-react'
+import { Mail, Globe, Linkedin } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -37,6 +37,17 @@ export function Footer() {
                 Contáctanos
               </Link>
             </nav>
+            <nav className="flex flex-col gap-2 pt-2 border-t border-neuratek-gray-medium/20">
+              <Link href="/aviso-legal" className="text-neuratek-gray-medium hover:text-neuratek-primary text-sm transition-colors">
+                Aviso Legal
+              </Link>
+              <Link href="/politica-privacidad" className="text-neuratek-gray-medium hover:text-neuratek-primary text-sm transition-colors">
+                Política de Privacidad
+              </Link>
+              <Link href="/politica-cookies" className="text-neuratek-gray-medium hover:text-neuratek-primary text-sm transition-colors">
+                Política de Cookies
+              </Link>
+            </nav>
           </div>
 
           {/* Contacto */}
@@ -58,6 +69,15 @@ export function Footer() {
               >
                 <Globe size={16} />
                 www.neuratek.ai
+              </a>
+              <a 
+                href="https://www.linkedin.com/company/neuratek" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-neuratek-gray-medium hover:text-neuratek-primary text-sm transition-colors"
+              >
+                <Linkedin size={16} />
+                LinkedIn
               </a>
             </div>
           </div>
