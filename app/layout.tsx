@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Exo_2, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
 const exo2 = Exo_2({ 
@@ -64,6 +65,7 @@ export default function RootLayout({
       <body className={`${exo2.variable} ${inter.variable} font-sans antialiased`}>
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
