@@ -63,7 +63,7 @@ export default function RootLayout({
     <html lang="es" className="bg-[#14202C]">
       <body className={`${exo2.variable} ${inter.variable} font-sans antialiased`}>
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <Analytics />
       </body>
     </html>
   )
