@@ -2,6 +2,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { WhatsAppButton } from '@/components/whatsapp-button'
 import { ScrollReveal } from '@/components/scroll-reveal'
+import { BrandsMarquee } from '@/components/brands-marquee'
 import { Brain, Cog, Code, BarChart3, ArrowRight, CheckCircle, Search, Rocket, Presentation, GraduationCap, ChevronDown, Star, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 
@@ -120,7 +121,7 @@ export default function HomePage() {
             <div className="flex justify-center mb-8">
               <div className="relative">
                 <div className="w-24 h-24 rounded-full bg-neuratek-primary/15 flex items-center justify-center glow-primary-lg">
-                  <Brain className="w-12 h-12 text-neuratek-light" />
+                  <img src="/brain-circuit.svg" alt="NEURATEK" className="w-12 h-12" />
                 </div>
                 <div className="absolute -top-4 -right-4 w-2 h-8 bg-gradient-to-b from-neuratek-light/0 via-neuratek-light/40 to-neuratek-light/0 rounded-full rotate-45 pointer-events-none" />
                 <div className="absolute -bottom-4 -left-4 w-2 h-8 bg-gradient-to-b from-neuratek-deep/0 via-neuratek-deep/40 to-neuratek-deep/0 rounded-full -rotate-45 pointer-events-none" />
@@ -196,7 +197,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white">Hernán Olmeda</h3>
-                    <p className="text-neuratek-light text-sm font-medium">CEO & Co-Fundador</p>
+                    <p className="text-neuratek-light text-sm font-medium">CTO & Co-Fundador</p>
                   </div>
                 </div>
                 <div className="space-y-2 text-sm text-white/80 leading-relaxed relative">
@@ -220,7 +221,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white">Julio Á. Robles</h3>
-                    <p className="text-neuratek-light text-sm font-medium">CTO & Co-Fundador</p>
+                    <p className="text-neuratek-light text-sm font-medium">CEO & Co-Fundador</p>
                   </div>
                 </div>
                 <div className="space-y-2 text-sm text-white/80 leading-relaxed relative">
@@ -249,6 +250,10 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
+
+      <div className="h-px bg-gradient-to-r from-transparent via-neuratek-primary/30 to-transparent mx-auto max-w-5xl" />
+
+      <BrandsMarquee />
 
       <div className="h-px bg-gradient-to-r from-transparent via-neuratek-primary/30 to-transparent mx-auto max-w-5xl" />
 

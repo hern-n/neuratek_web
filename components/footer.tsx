@@ -11,11 +11,11 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="inline-block">
               <Image
-                src="/logo.webp"
-                alt="NEURATEK"
-                width={160}
-                height={45}
-                className="h-10 w-auto"
+              src="/brain-circuit.svg"
+              alt="NEURATEK"
+              width={48}
+              height={48}
+              className="h-10 w-auto"
               />
             </Link>
             <p className="text-neuratek-gray-medium text-sm leading-relaxed">

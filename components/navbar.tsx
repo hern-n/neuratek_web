@@ -23,10 +23,10 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 hover:scale-105 transition-all duration-200">
             <Image
-              src="/logo.webp"
+              src="/brain-circuit.svg"
               alt="NEURATEK"
-              width={140}
-              height={39}
+              width={40}
+              height={40}
               className="h-8 w-auto"
               priority
             />

@@ -34,12 +34,12 @@ const values = [
 const team = [
   {
     name: 'Hernán',
-    role: 'CEO & Co-Fundador',
+    role: 'CTO & Co-Fundador',
     image: '/CV_Hernan.png',
   },
   {
     name: 'Julio',
-    role: 'CTO & Co-Fundador',
+    role: 'CEO & Co-Fundador',
     image: '/CV_Julio.png',
   },
 ]

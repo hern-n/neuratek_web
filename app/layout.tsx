@@ -38,20 +38,20 @@ export const metadata: Metadata = {
     title: 'NEURATEK - Inteligencia Artificial para Empresas',
     description: 'Automatizamos procesos, optimizamos empresas y llevamos tu negocio al futuro con inteligencia artificial.',
     url: 'https://www.neuratek.ai',
-    images: [{ url: '/logo.webp', width: 140, height: 39, alt: 'NEURATEK' }],
+    images: [{ url: '/brain-circuit.svg', width: 256, height: 256, alt: 'NEURATEK' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'NEURATEK - Inteligencia Artificial para Empresas',
     description: 'Automatizamos procesos, optimizamos empresas y llevamos tu negocio al futuro con inteligencia artificial.',
-    images: ['/logo.webp'],
+    images: ['/brain-circuit.svg'],
   },
   icons: {
     icon: [
-      { url: '/icon-light-32x32.png', type: 'image/png', sizes: '32x32', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', type: 'image/png', sizes: '32x32', media: '(prefers-color-scheme: dark)' },
+      { url: '/brain-circuit-dark.svg', type: 'image/svg+xml', media: '(prefers-color-scheme: light)' },
+      { url: '/brain-circuit.svg', type: 'image/svg+xml', media: '(prefers-color-scheme: dark)' },
     ],
-    apple: { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    apple: { url: '/brain-circuit.svg', sizes: '256x256', type: 'image/svg+xml' },
   },
 }
 
