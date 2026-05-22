@@ -33,6 +33,9 @@ export function Footer() {
               <Link href="/quienes-somos" className="text-neuratek-gray-medium hover:text-neuratek-primary text-sm transition-colors">
                 Quiénes Somos
               </Link>
+              <Link href="/nuestra-marca" className="text-neuratek-gray-medium hover:text-neuratek-primary text-sm transition-colors">
+                Nuestra Marca
+              </Link>
               <Link href="/contacto" className="text-neuratek-gray-medium hover:text-neuratek-primary text-sm transition-colors">
                 Contáctanos
               </Link>
