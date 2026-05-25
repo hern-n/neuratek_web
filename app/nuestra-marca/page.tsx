@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
+import { cookies } from 'next/headers'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Paintbrush, Palette, Sparkles } from 'lucide-react'
+import { getDictionary } from '@/lib/i18n/dictionaries'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
@@ -87,7 +89,10 @@ const combinations = [
   },
 ]
 
-export default function NuestraMarcaPage() {
+export default async function NuestraMarcaPage() {
+  const cookieStore = await cookies()
+  const locale = cookieStore.get('locale')?.value || 'es'
+  const dict = await getDictionary(locale)
   return (
     <main className="min-h-screen bg-neuratek-dark">
       <Navbar />
@@ -104,14 +109,17 @@ export default function NuestraMarcaPage() {
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-neuratek-primary" />
-            <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Identidad visual</span>
+            <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.nuestraMarca.hero.label}</span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-neuratek-primary" />
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Nuestra <span className="text-neuratek-light [text-shadow:_0_0_20px_rgba(60,173,190,0.3)]">Marca</span>
+              {locale === 'es' ? 'Nuestra' : 'Our'}
+              <span className="text-neuratek-light [text-shadow:_0_0_20px_rgba(60,173,190,0.3)]">
+                {locale === 'es' ? 'Marca' : ' Brand'}
+              </span>
           </h1>
           <p className="max-w-3xl mx-auto text-white/80 text-lg leading-relaxed text-pretty">
-            Descubre la identidad visual de NEURATEK: nuestra paleta de colores, logotipos y cartel corporativo que reflejan nuestra esencia innovadora y tecnológica.
+              {dict.nuestraMarca.hero.description}
           </p>
         </div>
       </section>
@@ -134,27 +142,27 @@ export default function NuestraMarcaPage() {
               <div className="space-y-6">
                 <div className="inline-flex items-center gap-3">
                   <div className="h-px w-8 bg-gradient-to-r from-neuratek-primary to-neuratek-light" />
-                  <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Historia</span>
+                    <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.nuestraMarca.history.label}</span>
                 </div>
-                <h2 className="text-3xl font-bold text-white">
-                  Nuestra Historia
-                </h2>
+                        <h2 className="text-3xl font-bold text-white">
+                          {dict.nuestraMarca.history.title}
+                        </h2>
                 <div className="space-y-4 text-white/80 leading-relaxed">
-                  <p>
-                    El nombre NEURATEK se compone de dos elementos que definen nuestra esencia:
-                  </p>
+                      <p>
+                        {dict.nuestraMarca.history.intro}
+                      </p>
                   <ul className="space-y-3 ml-4">
                     <li className="flex items-start gap-3 p-3 rounded-lg bg-neuratek-primary/[0.06] border border-neuratek-primary/10">
                       <span className="text-neuratek-light font-bold shrink-0">Neura:</span>
-                      <span>Inteligencia artificial basada en redes neuronales y razonamiento avanzado.</span>
+                      <span>{dict.nuestraMarca.history.neura}</span>
                     </li>
                     <li className="flex items-start gap-3 p-3 rounded-lg bg-neuratek-deep/[0.06] border border-neuratek-deep/10">
                       <span className="text-neuratek-light font-bold shrink-0">Tek:</span>
-                      <span>Tecnología moderna, software avanzado y enfoque innovador.</span>
+                      <span>{dict.nuestraMarca.history.tek}</span>
                     </li>
                   </ul>
                   <p className="text-[15px] leading-relaxed">
-                    Nacimos con el objetivo de hacer accesible la inteligencia artificial a empresas de todos los tamaños, transformando procesos complejos en soluciones eficientes y escalables.
+                      {dict.nuestraMarca.history.conclusion}
                   </p>
                 </div>
               </div>
@@ -197,15 +205,18 @@ export default function NuestraMarcaPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-gradient-to-r from-transparent to-neuratek-deep" />
-              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Identidad visual</span>
+              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.nuestraMarca.cartel.label}</span>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-neuratek-deep" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Cartel <span className="text-neuratek-light">Corporativo</span>
-            </h2>
-            <p className="max-w-2xl mx-auto text-white/70">
-              El cartel corporativo de NEURATEK refleja nuestra identidad de marca. Un diseño que combina tecnología, innovación y el característico color turquesa que nos representa.
-            </p>
+              <h2 className="text-3xl font-bold text-white mb-4">
+                {locale === 'es' ? 'Cartel' : 'Corporate'}
+                <span className="text-neuratek-light">
+                  {locale === 'es' ? 'Corporativo' : ' Poster'}
+                </span>
+              </h2>
+              <p className="max-w-2xl mx-auto text-white/70">
+                {dict.nuestraMarca.cartel.description}
+              </p>
           </div>
 
           <div className="max-w-2xl mx-auto">
@@ -244,7 +255,7 @@ export default function NuestraMarcaPage() {
                       <Paintbrush className="w-5 h-5 text-neuratek-primary" />
                     </div>
                     <span className="text-xs font-light tracking-widest text-neuratek-gray-medium uppercase">
-                      Inteligencia artificial
+                      {locale === 'es' ? 'Inteligencia artificial' : 'Artificial Intelligence'}
                     </span>
                   </div>
                   <span className="font-mono text-[10px] text-neuratek-primary bg-neuratek-primary/[0.08] border border-neuratek-primary/25 px-3 py-1.5 rounded">
@@ -254,24 +265,24 @@ export default function NuestraMarcaPage() {
 
                 {/* Hero */}
                 <div className="text-center mb-8">
-                  <p className="font-mono text-[10px] tracking-[0.25em] text-neuratek-primary/80 uppercase mb-4">
-                    // Sistema de IA empresarial
-                  </p>
+                    <p className="font-mono text-[10px] tracking-[0.25em] text-neuratek-primary/80 uppercase mb-4">
+                      {dict.nuestraMarca.cartel.subtitle}
+                    </p>
                   <h3 className="text-5xl sm:text-6xl font-black tracking-[0.08em] text-white uppercase leading-none mb-1" style={{ textShadow: '0 0 60px rgba(60,173,190,0.15)' }}>
                     NEURA<span className="text-neuratek-primary">TEK</span>
                   </h3>
-                  <span className="block text-xs font-light tracking-[0.25em] text-neuratek-gray-medium uppercase mb-5">
-                    Can't you do it? We can. Everything.
-                  </span>
+                    <span className="block text-xs font-light tracking-[0.25em] text-neuratek-gray-medium uppercase mb-5">
+                      {dict.nuestraMarca.cartel.tagline}
+                    </span>
                   <div className="w-14 h-px mx-auto bg-gradient-to-r from-transparent via-neuratek-primary to-transparent mb-5" />
-                  <p className="text-sm text-neuratek-gray-light font-light max-w-sm mx-auto leading-relaxed">
-                    Automatizamos procesos, optimizamos empresas y llevamos tu negocio al futuro con inteligencia artificial.
-                  </p>
+                    <p className="text-sm text-neuratek-gray-light font-light max-w-sm mx-auto leading-relaxed">
+                      {dict.nuestraMarca.cartel.descriptionText}
+                    </p>
                 </div>
 
                 {/* Services grid preview */}
                 <div className="grid grid-cols-2 gap-2 mb-6">
-                  {['Automatización con IA', 'Software a Medida', 'Integración de IA', 'Optimización'].map((s, i) => (
+                  {dict.nuestraMarca.cartel.services.map((s, i) => (
                     <div key={i} className="bg-neuratek-gray-dark/50 border border-neuratek-primary/15 rounded-lg p-3 relative overflow-hidden group/card hover:border-neuratek-light/40 transition-colors">
                       <div className="absolute top-0 left-0 w-[2px] h-full" style={{ backgroundColor: i % 2 === 0 ? '#3CADBE' : '#6FC9D6' }} />
                       <p className="font-mono text-[9px] tracking-widest mb-1" style={{ color: i % 2 === 0 ? '#2A8E9E' : '#3CADBE' }}>
@@ -286,10 +297,10 @@ export default function NuestraMarcaPage() {
                 {/* Pricing preview */}
                 <div className="bg-neuratek-gray-dark/30 border border-neuratek-primary/20 rounded-lg p-5 flex items-center justify-between gap-4 mb-6">
                   <div>
-                    <p className="font-mono text-[9px] tracking-widest text-neuratek-gray-medium uppercase mb-2">Modelo de inversión</p>
-                    <p className="text-xs font-semibold text-neuratek-gray-light mb-3">Proyecto estándar</p>
+                    <p className="font-mono text-[9px] tracking-widest text-neuratek-gray-medium uppercase mb-2">{dict.nuestraMarca.cartel.pricingTitle}</p>
+                    <p className="text-xs font-semibold text-neuratek-gray-light mb-3">{dict.nuestraMarca.cartel.pricingSubtitle}</p>
                     <div className="space-y-1">
-                      {['Mantenimiento mensual: 600 €/mes', 'Visita técnica: 1.500 €', 'Ampliaciones: según proyecto'].map(
+                      {dict.nuestraMarca.cartel.pricingItems.map(
                         (item, i) => (
                           <p key={i} className="text-[11px] text-neuratek-gray-medium flex items-center gap-1.5">
                             <span className="text-neuratek-primary">›</span>
@@ -301,16 +312,16 @@ export default function NuestraMarcaPage() {
                   </div>
                   <div className="text-center bg-neuratek-primary/[0.08] border border-neuratek-primary/30 rounded-lg px-5 py-4 min-w-[100px]">
                     <p className="text-2xl font-bold text-neuratek-primary leading-none mb-1">18K€</p>
-                    <p className="font-mono text-[9px] text-neuratek-deep tracking-widest">desde</p>
+                    <p className="font-mono text-[9px] text-neuratek-deep tracking-widest">{dict.nuestraMarca.cartel.pricingFrom}</p>
                   </div>
                 </div>
 
                 {/* Contact */}
                 <div className="flex gap-2">
-                  {[
-                    { label: 'Contacto', text: 'contacto@neuratek-web.vercel.app' },
-                    { label: 'Web', text: 'neuratek-web.vercel.app' },
-                  ].map((c, i) => (
+                      {[
+                        { label: dict.nuestraMarca.cartel.contactLabel, text: 'contacto@neuratek-web.vercel.app' },
+                        { label: dict.nuestraMarca.cartel.webLabel, text: 'neuratek-web.vercel.app' },
+                      ].map((c, i) => (
                     <div key={i} className="flex-1 bg-neuratek-gray-dark/40 border border-neuratek-primary/15 rounded-lg p-3 flex items-center gap-3 hover:border-neuratek-light/30 transition-colors">
                       <div className="w-7 h-7 rounded-full bg-neuratek-primary/10 border border-neuratek-primary/30 flex items-center justify-center flex-shrink-0">
                         <div className="w-3 h-3 rounded-full" style={{ backgroundColor: i === 0 ? '#3CADBE' : '#6FC9D6' }} />
@@ -350,28 +361,31 @@ export default function NuestraMarcaPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-gradient-to-r from-transparent to-neuratek-light" />
-              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest flex items-center gap-2">
-                <Palette className="w-4 h-4" />
-                Color
-              </span>
+                    <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest flex items-center gap-2">
+                      <Palette className="w-4 h-4" />
+                      {dict.nuestraMarca.colors.label}
+                    </span>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-neuratek-light" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Paleta de <span className="text-neuratek-light">Colores</span>
-            </h2>
-            <p className="max-w-2xl mx-auto text-white/70">
-              Nuestra paleta de colores combina tonos turquesa con una escala de grises, transmitiendo tecnología, innovación y profesionalidad.
-            </p>
+              <h2 className="text-3xl font-bold text-white mb-4">
+                {locale === 'es' ? 'Paleta de' : 'Color'}
+                <span className="text-neuratek-light">
+                  {locale === 'es' ? 'Colores' : ' Palette'}
+                </span>
+              </h2>
+              <p className="max-w-2xl mx-auto text-white/70">
+                {dict.nuestraMarca.colors.description}
+              </p>
           </div>
 
           {/* Swatches */}
           <div className="max-w-4xl mx-auto space-y-2 mb-10">
             <p className="text-[11px] font-medium tracking-widest uppercase text-neuratek-gray-medium mb-4 flex items-center gap-2">
               <Sparkles className="w-3 h-3 text-neuratek-primary" />
-              Paleta completa
+              {dict.nuestraMarca.colors.paletteLabel}
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {brandColors.map((color) => (
+              {brandColors.map((color, index) => (
                 <div
                   key={color.hex}
                   className="rounded-xl flex flex-col justify-end p-4 min-h-[100px] sm:min-h-[120px] hover:scale-[1.03] transition-transform duration-200"
@@ -382,7 +396,7 @@ export default function NuestraMarcaPage() {
                     boxShadow: color.hex === '#3CADBE' ? '0 0 20px rgba(60,173,190,0.3)' : 'none',
                   }}
                 >
-                  <p className="text-xs font-medium opacity-85">{color.name}</p>
+                    <p className="text-xs font-medium opacity-85">{dict.nuestraMarca.colors.swatches[index]}</p>
                   <p className="text-[11px] opacity-65 font-normal">{color.hex}</p>
                 </div>
               ))}
@@ -393,7 +407,7 @@ export default function NuestraMarcaPage() {
           <div className="max-w-4xl mx-auto">
             <p className="text-[11px] font-medium tracking-widest uppercase text-neuratek-gray-medium mb-4 flex items-center gap-2">
               <Sparkles className="w-3 h-3 text-neuratek-deep" />
-              Gradiente de marca
+              {dict.nuestraMarca.colors.gradientLabel}
             </p>
             <div className="h-12 rounded-xl overflow-hidden flex shadow-lg shadow-black/20">
               {gradientColors.map((c, i) => (
@@ -417,15 +431,18 @@ export default function NuestraMarcaPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-gradient-to-r from-transparent to-neuratek-deep" />
-              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Combinaciones</span>
+              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.nuestraMarca.combinations.label}</span>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-neuratek-deep" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Combinaciones <span className="text-neuratek-light">Recomendadas</span>
-            </h2>
-            <p className="max-w-2xl mx-auto text-white/70">
-              Formas de utilizar nuestra paleta de colores para crear interfaces coherentes y atractivas.
-            </p>
+              <h2 className="text-3xl font-bold text-white mb-4">
+                {locale === 'es' ? 'Combinaciones' : 'Recommended'}
+                <span className="text-neuratek-light">
+                  {locale === 'es' ? 'Recomendadas' : ' Combinations'}
+                </span>
+              </h2>
+              <p className="max-w-2xl mx-auto text-white/70">
+                {dict.nuestraMarca.combinations.description}
+              </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
@@ -444,9 +461,9 @@ export default function NuestraMarcaPage() {
                 >
                   <p className="text-[10px] font-normal mb-0.5 flex items-center gap-2" style={{ color: combo.headerLabel }}>
                     <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ backgroundColor: combo.accent }} />
-                    {combo.title}
+                    {dict.nuestraMarca.combinations.items[index].title}
                     <span className="opacity-60">·</span>
-                    {combo.subtitle}
+                    {dict.nuestraMarca.combinations.items[index].subtitle}
                   </p>
                   <p className="text-xs font-medium">{combo.label}</p>
                 </div>

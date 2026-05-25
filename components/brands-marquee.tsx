@@ -36,7 +36,15 @@ const brands2 = [
   { name: 'TikTok', file: '/images/brands2/tiktok.svg' },
 ]
 
-export function BrandsMarquee() {
+export function BrandsMarquee({
+  label = 'Colaboraciones',
+  title = 'Nuestras colaboraciones',
+  description = 'Empresas que confían en nuestro trabajo',
+}: {
+  label?: string
+  title?: string
+  description?: string
+}) {
   return (
     <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-neuratek-primary/[0.02] via-transparent to-neuratek-primary/[0.03] pointer-events-none" />
@@ -47,14 +55,14 @@ export function BrandsMarquee() {
         <div className="text-center mb-4">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="h-px w-8 bg-neuratek-primary/60" />
-            <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Colaboraciones</span>
+            <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{label}</span>
             <div className="h-px w-8 bg-neuratek-primary/60" />
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Nuestras <span className="text-neuratek-primary">colaboraciones</span>
+            {title}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            Empresas que confían en nuestro trabajo
+            {description}
           </p>
         </div>
 

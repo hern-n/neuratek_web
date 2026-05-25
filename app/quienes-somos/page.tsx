@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
+import { cookies } from 'next/headers'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Users, Target, Lightbulb } from 'lucide-react'
 import Image from 'next/image'
+import { getDictionary } from '@/lib/i18n/dictionaries'
 
 export const metadata: Metadata = {
   title: 'Quiénes Somos',
@@ -13,38 +15,21 @@ export const metadata: Metadata = {
   },
 }
 
-const values = [
-  {
-    icon: Target,
-    title: 'Misión',
-    description: 'Transformar empresas mediante soluciones de inteligencia artificial que optimizan procesos y potencian el crecimiento sostenible.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Visión',
-    description: 'Ser el referente en IA empresarial para PYMEs, haciendo accesible la tecnología más avanzada a cualquier negocio.',
-  },
-  {
-    icon: Users,
-    title: 'Valores',
-    description: 'Innovación constante, compromiso con el cliente, transparencia en cada proyecto y excelencia técnica en todas nuestras soluciones.',
-  },
-]
+export default async function QuienesSomosPage() {
+  const cookieStore = await cookies()
+  const locale = cookieStore.get('locale')?.value || 'es'
+  const dict = await getDictionary(locale)
 
-const team = [
-  {
-    name: 'Hernán',
-    role: 'CTO & Co-Fundador',
-    image: '/CV_Hernan.png',
-  },
-  {
-    name: 'Julio',
-    role: 'CEO & Co-Fundador',
-    image: '/CV_Julio.png',
-  },
-]
+  const values = [
+    { icon: Target, title: dict.quienesSomos.values.mission.title, description: dict.quienesSomos.values.mission.description },
+    { icon: Lightbulb, title: dict.quienesSomos.values.vision.title, description: dict.quienesSomos.values.vision.description },
+    { icon: Users, title: dict.quienesSomos.values.values.title, description: dict.quienesSomos.values.values.description },
+  ]
 
-export default function QuienesSomosPage() {
+  const team = [
+    { name: 'Hernán', role: dict.quienesSomos.team.hernanRole, image: '/CV_Hernan.png' },
+    { name: 'Julio', role: dict.quienesSomos.team.julioRole, image: '/CV_Julio.png' },
+  ]
   return (
     <main className="min-h-screen bg-neuratek-dark">
       <Navbar />
@@ -56,14 +41,14 @@ export default function QuienesSomosPage() {
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="h-px w-8 bg-neuratek-primary/60" />
-            <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Sobre nosotros</span>
+            <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.quienesSomos.hero.label}</span>
             <div className="h-px w-8 bg-neuratek-primary/60" />
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Quiénes <span className="text-neuratek-primary">Somos</span>
+            {dict.quienesSomos.hero.title}
           </h1>
           <p className="max-w-3xl mx-auto text-white/80 text-lg leading-relaxed text-pretty">
-            NEURATEK es una empresa de inteligencia artificial y desarrollo de software a medida, especializada en automatización de procesos empresariales para pequeñas y medianas empresas.
+            {dict.quienesSomos.hero.description}
           </p>
         </div>
       </section>
@@ -82,27 +67,27 @@ export default function QuienesSomosPage() {
             <div className="space-y-6">
               <div className="inline-flex items-center gap-3">
                 <div className="h-px w-8 bg-neuratek-primary/60" />
-                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Historia</span>
+                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.quienesSomos.history.label}</span>
               </div>
               <h2 className="text-3xl font-bold text-white">
-                Nuestra Historia
+                {dict.quienesSomos.history.title}
               </h2>
               <div className="space-y-4 text-white/80 leading-relaxed">
                 <p>
-                  El nombre NEURATEK se compone de dos elementos que definen nuestra esencia:
+                  {dict.quienesSomos.history.intro}
                 </p>
                 <ul className="space-y-2 ml-4">
                   <li className="flex items-start gap-2">
                     <span className="text-neuratek-primary font-semibold">Neura:</span>
-                    <span>Inteligencia artificial basada en redes neuronales y razonamiento avanzado.</span>
+                    <span>{dict.quienesSomos.history.neura}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-neuratek-primary font-semibold">Tek:</span>
-                    <span>Tecnología moderna, software avanzado y enfoque innovador.</span>
+                    <span>{dict.quienesSomos.history.tek}</span>
                   </li>
                 </ul>
                 <p>
-                  Nacimos con el objetivo de hacer accesible la inteligencia artificial a empresas de todos los tamaños, transformando procesos complejos en soluciones eficientes y escalables.
+                  {dict.quienesSomos.history.conclusion}
                 </p>
               </div>
             </div>
@@ -112,7 +97,7 @@ export default function QuienesSomosPage() {
                   <div className="w-20 h-20 rounded-full bg-gradient-to-br from-neuratek-primary/25 to-neuratek-deep/25 flex items-center justify-center mx-auto mb-4 glow-primary-lg">
                     <span className="text-4xl font-bold text-neuratek-light">N</span>
                   </div>
-                  <p className="text-white/50 text-sm">Innovación desde el día uno</p>
+                  <p className="text-white/50 text-sm">{dict.quienesSomos.history.imageLabel}</p>
                 </div>
               </div>
             </div>
@@ -130,11 +115,11 @@ export default function QuienesSomosPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-neuratek-primary/60" />
-              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Filosofía</span>
+              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.quienesSomos.values.label}</span>
               <div className="h-px w-8 bg-neuratek-primary/60" />
             </div>
             <h2 className="text-3xl font-bold text-white mb-4">
-              Nuestros Pilares
+              {dict.quienesSomos.values.title}
             </h2>
           </div>
 
@@ -174,14 +159,14 @@ export default function QuienesSomosPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-neuratek-primary/60" />
-              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Equipo</span>
+              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.quienesSomos.team.label}</span>
               <div className="h-px w-8 bg-neuratek-primary/60" />
             </div>
             <h2 className="text-3xl font-bold text-white mb-4">
-              Nuestro Equipo
+              {dict.quienesSomos.team.title}
             </h2>
             <p className="text-white/70 max-w-2xl mx-auto">
-              Los profesionales detrás de NEURATEK
+              {dict.quienesSomos.team.description}
             </p>
           </div>
 

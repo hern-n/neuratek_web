@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Exo_2, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { cookies } from 'next/headers'
+import { LanguageProvider } from '@/lib/i18n/language-context'
 import './globals.css'
 
 const exo2 = Exo_2({ 
@@ -55,15 +57,20 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const cookieStore = await cookies()
+  const initialLocale = cookieStore.get('locale')?.value || 'es'
+
   return (
-    <html lang="es" className="bg-[#14202C]">
+    <html lang={initialLocale} className="bg-[#14202C]">
       <body className={`${exo2.variable} ${inter.variable} font-sans antialiased`}>
-        {children}
+        <LanguageProvider initialLocale={initialLocale}>
+          {children}
+        </LanguageProvider>
         <Analytics />
         <SpeedInsights />
       </body>

@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { WhatsAppButton } from '@/components/whatsapp-button'
@@ -5,105 +6,40 @@ import { ScrollReveal } from '@/components/scroll-reveal'
 import { BrandsMarquee } from '@/components/brands-marquee'
 import { Brain, Cog, Code, BarChart3, ArrowRight, CheckCircle, Search, Rocket, Presentation, GraduationCap, ChevronDown, Star, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
+import { getDictionary } from '@/lib/i18n/dictionaries'
 
-const services = [
-  {
-    icon: Brain,
-    title: 'Automatización con IA',
-    description: 'Automatización de procesos empresariales con inteligencia artificial avanzada.',
-  },
-  {
-    icon: Code,
-    title: 'Software a Medida',
-    description: 'Desarrollo de software inteligente adaptado a las necesidades de tu empresa.',
-  },
-  {
-    icon: Cog,
-    title: 'Integración de IA',
-    description: 'Integración de inteligencia artificial en tus sistemas empresariales existentes.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Optimización y Análisis',
-    description: 'Optimización y análisis de procesos mediante IA para mejorar la eficiencia.',
-  },
-]
+const serviceIcons = [Brain, Code, Cog, BarChart3] as const
+const methodologyIcons = [Search, Rocket, Presentation, GraduationCap] as const
 
-const methodology = [
-  {
-    icon: Search,
-    title: 'Analizamos',
-    description: 'Estudiamos tu empresa, procesos y necesidades para identificar oportunidades de mejora con IA.',
-  },
-  {
-    icon: Rocket,
-    title: 'Desarrollamos',
-    description: 'Creamos la solución a medida utilizando las tecnologías más avanzadas del mercado.',
-  },
-  {
-    icon: Presentation,
-    title: 'Implementamos',
-    description: 'Integramos la solución en tu empresa con un acompañamiento continuo.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Formamos',
-    description: 'Capacitamos a tu equipo para que aprovechen al máximo la nueva tecnología.',
-  },
-]
+export default async function HomePage() {
+  const cookieStore = await cookies()
+  const locale = cookieStore.get('locale')?.value || 'es'
+  const dict = await getDictionary(locale)
 
-const testimonials = [
-  {
-    name: 'Cliente Satisfecho',
-    role: 'CEO, Empresa Tecnológica',
-    content: 'NEURATEK transformó nuestros procesos con IA. La implementación fue impecable y los resultados superaron nuestras expectativas.',
-    rating: 5,
-  },
-  {
-    name: 'Cliente Satisfecho',
-    role: 'Director de Operaciones',
-    content: 'El equipo de NEURATEK entendió nuestras necesidades desde el primer día. La automatización nos ha ahorrado horas de trabajo cada semana.',
-    rating: 5,
-  },
-  {
-    name: 'Cliente Satisfecho',
-    role: 'Gerente PYME',
-    content: 'Creía que la IA solo era para grandes empresas. NEURATEK nos demostró que no es así. Ahora competimos en otro nivel.',
-    rating: 5,
-  },
-]
+  const neuratek = dict.common.neuratek
+  const neuratekSplit = [neuratek.slice(0, -3), neuratek.slice(-3)]
 
-const faqs = [
-  {
-    question: '¿Qué tipo de empresas pueden beneficiarse de vuestros servicios?',
-    answer: 'Trabajamos con PYMEs de todos los sectores. Nuestras soluciones se adaptan al tamaño y necesidades específicas de cada negocio, desde startups hasta empresas consolidadas.',
-  },
-  {
-    question: '¿Cuánto tiempo lleva implementar una solución de IA?',
-    answer: 'Depende de la complejidad del proyecto. Un análisis inicial nos permite darte un cronograma preciso, pero la mayoría de los proyectos se completan en 4-8 semanas.',
-  },
-  {
-    question: '¿Necesito conocimientos técnicos para usar vuestras soluciones?',
-    answer: 'No. Diseñamos todas nuestras soluciones pensando en usuarios sin formación técnica. Además, incluimos formación básica para tu equipo.',
-  },
-  {
-    question: '¿Ofrecéis soporte después de la implementación?',
-    answer: 'Sí. Todos nuestros planes incluyen mantenimiento mensual con soporte técnico, actualizaciones y mejoras continuas.',
-  },
-  {
-    question: '¿Cómo empezamos a trabajar juntos?',
-    answer: 'El primer paso es una reunión sin compromiso para analizar las necesidades de tu empresa. Contáctanos y te propondremos la mejor solución.',
-  },
-]
+  const services = dict.home.services.items.map((item, i) => ({
+    icon: serviceIcons[i],
+    title: item.title,
+    description: item.description,
+  }))
 
-const features = [
-  'Análisis completo de empresa',
-  'Desarrollo de solución personalizada',
-  'Implementación profesional',
-  'Formación básica incluida',
-]
+  const methodology = dict.home.methodology.steps.map((step, i) => ({
+    icon: methodologyIcons[i],
+    title: step.title,
+    description: step.description,
+  }))
 
-export default function HomePage() {
+  const testimonials = dict.home.testimonials.items
+
+  const faqs = dict.home.faq.items.map(item => ({
+    question: item.q,
+    answer: item.a,
+  }))
+
+  const features = dict.home.pricing.standardProject.features
+
   return (
     <main className="min-h-screen bg-neuratek-dark">
       <Navbar />
@@ -131,17 +67,17 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight text-balance">
-              NEURA<span className="text-neuratek-light">TEK</span>
+              {neuratekSplit[0]}<span className="text-neuratek-light">{neuratekSplit[1]}</span>
             </h1>
             <div className="flex items-center justify-center gap-3">
               <div className="h-px w-16 bg-gradient-to-r from-transparent to-neuratek-primary/60" />
               <p className="text-xl sm:text-2xl text-neuratek-light font-medium [text-shadow:_0_0_20px_rgba(60,173,190,0.3)]">
-                Can't you do it? We can. Everything.
+                {dict.home.hero.subtitle}
               </p>
               <div className="h-px w-16 bg-gradient-to-l from-transparent to-neuratek-primary/60" />
             </div>
             <p className="max-w-2xl mx-auto text-white/80 text-lg leading-relaxed text-pretty">
-              Automatizamos procesos, optimizamos empresas y llevamos tu negocio al futuro con inteligencia artificial.
+              {dict.home.hero.description}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -149,14 +85,14 @@ export default function HomePage() {
                 href="/contacto"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-neuratek-primary text-white font-semibold rounded-lg hover:bg-neuratek-light hover:text-neuratek-dark hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 glow-primary-lg shadow-lg shadow-neuratek-primary/20"
               >
-                Solicitar Información
+                {dict.common.requestInfo}
                 <ArrowRight size={20} />
               </Link>
               <Link
                 href="/quienes-somos"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/20 text-white/80 font-semibold rounded-lg hover:border-neuratek-primary hover:text-neuratek-primary hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               >
-                Conocer más
+                {dict.common.learnMore}
               </Link>
             </div>
           </div>
@@ -175,14 +111,20 @@ export default function HomePage() {
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-neuratek-primary/60" />
-                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Equipo</span>
+                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.home.founders.label}</span>
                 <div className="h-px w-8 bg-neuratek-primary/60" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Nuestros <span className="text-neuratek-primary">fundadores</span>
+                {dict.home.founders.title.split(' ').length > 1 ? (
+                  <>
+                    {dict.home.founders.title.split(' ').slice(0, -1).join(' ')} <span className="text-neuratek-primary">{dict.home.founders.title.split(' ').pop()}</span>
+                  </>
+                ) : (
+                  dict.home.founders.title
+                )}
               </h2>
               <p className="text-white/80 max-w-2xl mx-auto">
-                Detrás de NEURATEK hay un equipo con el equilibrio perfecto entre <strong className="text-white">tecnología</strong> y <strong className="text-white">negocio</strong>.
+                {dict.home.founders.description}
               </p>
             </div>
           </ScrollReveal>
@@ -196,17 +138,16 @@ export default function HomePage() {
                     H
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">Hernán Olmeda</h3>
-                    <p className="text-neuratek-light text-sm font-medium">CTO & Co-Fundador</p>
+                    <h3 className="text-xl font-bold text-white">{dict.home.founders.hernan.name}</h3>
+                    <p className="text-neuratek-light text-sm font-medium">{dict.home.founders.hernan.role}</p>
                   </div>
                 </div>
                 <div className="space-y-2 text-sm text-white/80 leading-relaxed relative">
-                  <p>Estudiante de informática, programador autodidacta con enfoque en <strong className="text-white">Python</strong> y resolución de problemas técnicos.</p>
+                  <p>{dict.home.founders.hernan.description}</p>
                   <div className="flex flex-wrap gap-2 pt-2">
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">Python</span>
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">Programación</span>
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">Inglés B2</span>
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">Autodidacta</span>
+                    {dict.home.founders.hernan.tags.map((tag, i) => (
+                      <span key={i} className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">{tag}</span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -220,17 +161,16 @@ export default function HomePage() {
                     J
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">Julio Á. Robles</h3>
-                    <p className="text-neuratek-light text-sm font-medium">CEO & Co-Fundador</p>
+                    <h3 className="text-xl font-bold text-white">{dict.home.founders.julio.name}</h3>
+                    <p className="text-neuratek-light text-sm font-medium">{dict.home.founders.julio.role}</p>
                   </div>
                 </div>
                 <div className="space-y-2 text-sm text-white/80 leading-relaxed relative">
-                  <p>Experto en <strong className="text-white">gestión empresarial</strong> e implantación de IA. Formado en CC. Empresariales y máster en Business &amp; Analytics.</p>
+                  <p>{dict.home.founders.julio.description}</p>
                   <div className="flex flex-wrap gap-2 pt-2">
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">Business & Analytics</span>
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">Gestión</span>
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">IA Empresarial</span>
-                    <span className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">Inversión</span>
+                    {dict.home.founders.julio.tags.map((tag, i) => (
+                      <span key={i} className="px-2.5 py-1 bg-gradient-to-r from-neuratek-primary/20 to-neuratek-deep/20 text-neuratek-light text-xs rounded-full border border-neuratek-primary/20">{tag}</span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -243,7 +183,7 @@ export default function HomePage() {
                 href="/quienes-somos#equipo"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-neuratek-primary text-neuratek-primary font-semibold rounded-lg hover:bg-neuratek-primary hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               >
-                Ver currículums completos
+                {dict.common.viewFullResumes}
                 <ArrowRight size={20} />
               </Link>
             </div>
@@ -253,7 +193,11 @@ export default function HomePage() {
 
       <div className="h-px bg-gradient-to-r from-transparent via-neuratek-primary/30 to-transparent mx-auto max-w-5xl" />
 
-      <BrandsMarquee />
+      <BrandsMarquee
+        label={dict.home.brands.label}
+        title={dict.home.brands.title}
+        description={dict.home.brands.description}
+      />
 
       <div className="h-px bg-gradient-to-r from-transparent via-neuratek-primary/30 to-transparent mx-auto max-w-5xl" />
 
@@ -275,14 +219,14 @@ export default function HomePage() {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-neuratek-primary/60" />
-                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Servicios</span>
+                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.home.services.label}</span>
                 <div className="h-px w-8 bg-neuratek-primary/60" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Nuestros Servicios
+                {dict.home.services.title}
               </h2>
               <p className="text-white/70 max-w-2xl mx-auto">
-                Soluciones de inteligencia artificial diseñadas para transformar tu empresa
+                {dict.home.services.description}
               </p>
             </div>
           </ScrollReveal>
@@ -322,14 +266,20 @@ export default function HomePage() {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-neuratek-primary/60" />
-                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Metodología</span>
+                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.home.methodology.label}</span>
                 <div className="h-px w-8 bg-neuratek-primary/60" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Cómo <span className="text-neuratek-primary">trabajamos</span>
+                {dict.home.methodology.title.split(' ').length > 1 ? (
+                  <>
+                    {dict.home.methodology.title.split(' ').slice(0, -1).join(' ')} <span className="text-neuratek-primary">{dict.home.methodology.title.split(' ').pop()}</span>
+                  </>
+                ) : (
+                  dict.home.methodology.title
+                )}
               </h2>
               <p className="text-white/70 max-w-2xl mx-auto">
-                Un proceso probado que garantiza resultados desde el primer día
+                {dict.home.methodology.description}
               </p>
             </div>
           </ScrollReveal>
@@ -368,14 +318,14 @@ export default function HomePage() {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-neuratek-primary/60" />
-                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Inversión</span>
+                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.home.pricing.label}</span>
                 <div className="h-px w-8 bg-neuratek-primary/60" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Modelo de Precios
+                {dict.home.pricing.title}
               </h2>
               <p className="text-white/70 max-w-2xl mx-auto">
-                Inversión transparente para la transformación digital de tu empresa
+                {dict.home.pricing.description}
               </p>
             </div>
           </ScrollReveal>
@@ -387,10 +337,10 @@ export default function HomePage() {
                 <div className="absolute -bottom-6 -left-6 w-20 h-20 rounded-full bg-neuratek-deep/[0.06] pointer-events-none" />
                 <div className="mb-6 relative">
                   <span className="inline-block px-3 py-1 bg-neuratek-primary/20 text-neuratek-light text-xs font-medium uppercase tracking-wider rounded-full border border-neuratek-primary/30 mb-3">
-                    Recomendado
+                    {dict.home.pricing.recommended}
                   </span>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-bold text-white">18.000€</span>
+                    <span className="text-5xl font-bold text-white">{dict.home.pricing.standardProject.price}</span>
                   </div>
                 </div>
 
@@ -409,7 +359,7 @@ export default function HomePage() {
                   href="/contacto"
                   className="relative block text-center px-6 py-3 bg-neuratek-primary text-white font-semibold rounded-lg hover:bg-neuratek-light hover:text-neuratek-dark hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg shadow-neuratek-primary/30"
                 >
-                  Solicitar Presupuesto
+                  {dict.common.requestQuote}
                 </Link>
               </div>
             </ScrollReveal>
@@ -420,12 +370,12 @@ export default function HomePage() {
                   <div className="absolute top-0 right-0 w-16 h-16 rounded-bl-full bg-neuratek-primary/[0.06] group-hover:bg-neuratek-primary/[0.1] transition-colors pointer-events-none" />
                   <div className="flex justify-between items-center relative">
                     <div>
-                      <h4 className="text-white font-semibold">Consultoría Inicial</h4>
+                      <h4 className="text-white font-semibold">{dict.home.pricing.consulting.title}</h4>
                       <p className="text-white/60 text-sm mt-1">
-                        Análisis de necesidades y propuesta personalizada
+                        {dict.home.pricing.consulting.description}
                       </p>
                     </div>
-                    <span className="text-2xl font-bold text-neuratek-light">2.500€</span>
+                    <span className="text-2xl font-bold text-neuratek-light">{dict.home.pricing.consulting.price}</span>
                   </div>
                 </div>
               </ScrollReveal>
@@ -435,12 +385,12 @@ export default function HomePage() {
                   <div className="absolute top-0 right-0 w-16 h-16 rounded-bl-full bg-neuratek-primary/[0.06] group-hover:bg-neuratek-primary/[0.1] transition-colors pointer-events-none" />
                   <div className="flex justify-between items-center relative">
                     <div>
-                      <h4 className="text-white font-semibold">Mantenimiento Mensual</h4>
+                      <h4 className="text-white font-semibold">{dict.home.pricing.maintenance.title}</h4>
                       <p className="text-white/60 text-sm mt-1">
-                        Soporte técnico y actualizaciones
+                        {dict.home.pricing.maintenance.description}
                       </p>
                     </div>
-                    <span className="text-2xl font-bold text-neuratek-light">600€/mes</span>
+                    <span className="text-2xl font-bold text-neuratek-light">{dict.home.pricing.maintenance.price}</span>
                   </div>
                 </div>
               </ScrollReveal>
@@ -450,12 +400,12 @@ export default function HomePage() {
                   <div className="absolute top-0 right-0 w-16 h-16 rounded-bl-full bg-neuratek-deep/[0.06] group-hover:bg-neuratek-deep/[0.1] transition-colors pointer-events-none" />
                   <div className="flex justify-between items-center relative">
                     <div>
-                      <h4 className="text-white font-semibold">Visitas Técnicas</h4>
+                      <h4 className="text-white font-semibold">{dict.home.pricing.visits.title}</h4>
                       <p className="text-white/60 text-sm mt-1">
-                        Asistencia presencial + transporte
+                        {dict.home.pricing.visits.description}
                       </p>
                     </div>
-                    <span className="text-2xl font-bold text-neuratek-light">1.500€</span>
+                    <span className="text-2xl font-bold text-neuratek-light">{dict.home.pricing.visits.price}</span>
                   </div>
                 </div>
               </ScrollReveal>
@@ -465,12 +415,12 @@ export default function HomePage() {
                   <div className="absolute top-0 right-0 w-16 h-16 rounded-bl-full bg-neuratek-primary/[0.06] group-hover:bg-neuratek-primary/[0.1] transition-colors pointer-events-none" />
                   <div className="flex justify-between items-center relative">
                     <div>
-                      <h4 className="text-white font-semibold">Mejoras y Ampliaciones</h4>
+                      <h4 className="text-white font-semibold">{dict.home.pricing.upgrades.title}</h4>
                       <p className="text-white/60 text-sm mt-1">
-                        Según necesidades del proyecto
+                        {dict.home.pricing.upgrades.description}
                       </p>
                     </div>
-                    <span className="text-lg font-bold text-neuratek-light">A consultar</span>
+                    <span className="text-lg font-bold text-neuratek-light">{dict.home.pricing.upgrades.price}</span>
                   </div>
                 </div>
               </ScrollReveal>
@@ -492,14 +442,20 @@ export default function HomePage() {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-neuratek-primary/60" />
-                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Testimonios</span>
+                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.home.testimonials.label}</span>
                 <div className="h-px w-8 bg-neuratek-primary/60" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Lo que dicen <span className="text-neuratek-primary">nuestros clientes</span>
+                {dict.home.testimonials.title.split(' ').length > 1 ? (
+                  <>
+                    {dict.home.testimonials.title.split(' ').slice(0, -1).join(' ')} <span className="text-neuratek-primary">{dict.home.testimonials.title.split(' ').pop()}</span>
+                  </>
+                ) : (
+                  dict.home.testimonials.title
+                )}
               </h2>
               <p className="text-white/70 max-w-2xl mx-auto">
-                La satisfacción de nuestros clientes es nuestra mejor carta de presentación
+                {dict.home.testimonials.description}
               </p>
             </div>
           </ScrollReveal>
@@ -542,14 +498,20 @@ export default function HomePage() {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-neuratek-primary/60" />
-                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">FAQ</span>
+                <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.home.faq.label}</span>
                 <div className="h-px w-8 bg-neuratek-primary/60" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Preguntas <span className="text-neuratek-primary">Frecuentes</span>
+                {dict.home.faq.title.split(' ').length > 1 ? (
+                  <>
+                    {dict.home.faq.title.split(' ').slice(0, -1).join(' ')} <span className="text-neuratek-primary">{dict.home.faq.title.split(' ').pop()}</span>
+                  </>
+                ) : (
+                  dict.home.faq.title
+                )}
               </h2>
               <p className="text-white/70 max-w-2xl mx-auto">
-                Resolvemos tus dudas sobre nuestros servicios de inteligencia artificial
+                {dict.home.faq.description}
               </p>
             </div>
           </ScrollReveal>
@@ -588,20 +550,20 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="inline-flex items-center gap-3 mb-6">
               <div className="h-px w-8 bg-neuratek-primary/60" />
-              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">Contacto</span>
+              <span className="text-neuratek-primary text-sm font-medium uppercase tracking-widest">{dict.home.cta.label}</span>
               <div className="h-px w-8 bg-neuratek-primary/60" />
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 text-balance">
-              ¿Listo para transformar tu empresa con IA?
+              {dict.home.cta.title}
             </h2>
             <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto text-pretty">
-              Contáctanos hoy y descubre cómo NEURATEK puede llevar tu negocio al siguiente nivel con soluciones de inteligencia artificial.
+              {dict.home.cta.description}
             </p>
             <Link
               href="/contacto"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-neuratek-primary text-white font-semibold rounded-lg hover:bg-neuratek-light hover:text-neuratek-dark hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 glow-primary-lg shadow-lg shadow-neuratek-primary/20"
             >
-              Contactar Ahora
+              {dict.common.contactNow}
               <ArrowRight size={20} />
             </Link>
           </ScrollReveal>
