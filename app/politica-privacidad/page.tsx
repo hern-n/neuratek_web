@@ -51,7 +51,7 @@ export default function PoliticaPrivacidadPage() {
             <section className="p-6 bg-gradient-to-br from-neuratek-gray-dark/80 to-neuratek-dark/90 rounded-xl border border-white/10">
               <h2 className="text-xl font-bold text-white mb-4">4. Derechos</h2>
               <p className="text-sm">
-                Puedes ejercer tus derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición escribiendo a contacto@neuratek.ai.
+                Puedes ejercer tus derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición escribiendo a contacto@neuratek-web.vercel.app.
               </p>
             </section>
 

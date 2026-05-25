@@ -25,8 +25,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'contacto@neuratek.ai',
-    href: 'mailto:contacto@neuratek.ai',
+    value: 'contacto@neuratek-web.vercel.app',
+    href: 'mailto:contacto@neuratek-web.vercel.app',
   },
   {
     icon: Phone,
@@ -43,8 +43,8 @@ const contactInfo = [
   {
     icon: Globe,
     label: 'Web',
-    value: 'www.neuratek.ai',
-    href: 'https://www.neuratek.ai',
+    value: 'neuratek-web.vercel.app',
+    href: 'https://neuratek-web.vercel.app',
   },
 ]
 

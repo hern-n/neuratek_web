@@ -32,8 +32,8 @@ export default function AvisoLegalPage() {
               <ul className="space-y-2 text-sm">
                 <li><strong className="text-white">Denominación social:</strong> NEURATEK</li>
                 <li><strong className="text-white">Dirección:</strong> Passeig de Gràcia, 08007 Barcelona</li>
-                <li><strong className="text-white">Email:</strong> contacto@neuratek.ai</li>
-                <li><strong className="text-white">Web:</strong> www.neuratek.ai</li>
+                <li><strong className="text-white">Email:</strong> contacto@neuratek-web.vercel.app</li>
+                <li><strong className="text-white">Web:</strong> neuratek-web.vercel.app</li>
               </ul>
             </section>
 

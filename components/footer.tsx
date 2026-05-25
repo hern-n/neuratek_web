@@ -58,20 +58,20 @@ export function Footer() {
             <h4 className="text-white font-semibold">Contacto</h4>
             <div className="space-y-3">
               <a 
-                href="mailto:contacto@neuratek.ai" 
+                href="mailto:contacto@neuratek-web.vercel.app" 
                 className="flex items-center gap-2 text-neuratek-gray-medium hover:text-neuratek-primary text-sm transition-colors"
               >
                 <Mail size={16} />
-                contacto@neuratek.ai
+                contacto@neuratek-web.vercel.app
               </a>
               <a 
-                href="https://www.neuratek.ai" 
+                href="https://neuratek-web.vercel.app" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-neuratek-gray-medium hover:text-neuratek-primary text-sm transition-colors"
               >
                 <Globe size={16} />
-                www.neuratek.ai
+                neuratek-web.vercel.app
               </a>
               <a 
                 href="https://www.linkedin.com/company/neuratek" 

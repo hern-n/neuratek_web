@@ -136,7 +136,7 @@ export default function HomePage() {
             <div className="flex items-center justify-center gap-3">
               <div className="h-px w-16 bg-gradient-to-r from-transparent to-neuratek-primary/60" />
               <p className="text-xl sm:text-2xl text-neuratek-light font-medium [text-shadow:_0_0_20px_rgba(60,173,190,0.3)]">
-                Inteligencia Artificial para Empresas
+                Can't you do it? We can. Everything.
               </p>
               <div className="h-px w-16 bg-gradient-to-l from-transparent to-neuratek-primary/60" />
             </div>

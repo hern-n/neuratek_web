@@ -62,7 +62,7 @@ export default function PoliticaCookiesPage() {
             <section className="p-6 bg-gradient-to-br from-neuratek-gray-dark/80 to-neuratek-dark/90 rounded-xl border border-white/10">
               <h2 className="text-xl font-bold text-white mb-4">4. Contacto</h2>
               <p className="text-sm">
-                Para cualquier duda sobre nuestra política de cookies, puedes escribirnos a contacto@neuratek.ai.
+                Para cualquier duda sobre nuestra política de cookies, puedes escribirnos a contacto@neuratek-web.vercel.app.
               </p>
             </section>
           </div>

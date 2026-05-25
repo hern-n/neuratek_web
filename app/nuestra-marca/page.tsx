@@ -261,7 +261,7 @@ export default function NuestraMarcaPage() {
                     NEURA<span className="text-neuratek-primary">TEK</span>
                   </h3>
                   <span className="block text-xs font-light tracking-[0.25em] text-neuratek-gray-medium uppercase mb-5">
-                    Inteligencia Artificial para Empresas
+                    Can't you do it? We can. Everything.
                   </span>
                   <div className="w-14 h-px mx-auto bg-gradient-to-r from-transparent via-neuratek-primary to-transparent mb-5" />
                   <p className="text-sm text-neuratek-gray-light font-light max-w-sm mx-auto leading-relaxed">
@@ -308,8 +308,8 @@ export default function NuestraMarcaPage() {
                 {/* Contact */}
                 <div className="flex gap-2">
                   {[
-                    { label: 'Contacto', text: 'contacto@neuratek.ai' },
-                    { label: 'Web', text: 'www.neuratek.ai' },
+                    { label: 'Contacto', text: 'contacto@neuratek-web.vercel.app' },
+                    { label: 'Web', text: 'neuratek-web.vercel.app' },
                   ].map((c, i) => (
                     <div key={i} className="flex-1 bg-neuratek-gray-dark/40 border border-neuratek-primary/15 rounded-lg p-3 flex items-center gap-3 hover:border-neuratek-light/30 transition-colors">
                       <div className="w-7 h-7 rounded-full bg-neuratek-primary/10 border border-neuratek-primary/30 flex items-center justify-center flex-shrink-0">

@@ -17,7 +17,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.neuratek.ai'),
+  metadataBase: new URL('https://neuratek-web.vercel.app'),
   title: {
     default: 'NEURATEK - Inteligencia Artificial para Empresas',
     template: '%s | NEURATEK',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: 'NEURATEK',
     title: 'NEURATEK - Inteligencia Artificial para Empresas',
     description: 'Automatizamos procesos, optimizamos empresas y llevamos tu negocio al futuro con inteligencia artificial.',
-    url: 'https://www.neuratek.ai',
+    url: 'https://neuratek-web.vercel.app',
     images: [{ url: '/brain-circuit.svg', width: 256, height: 256, alt: 'NEURATEK' }],
   },
   twitter: {
