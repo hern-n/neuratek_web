@@ -1,0 +1,25 @@
+name: neuratek
+description: >-
+  Inteligencia Artificial para Empresas — Automatización de procesos empresariales, desarrollo de software a medida e
+  integración de IA.
+author: Hernan
+version: 0.1.0
+technologies:
+  - Node.js
+  - Next.js
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - shadcn/ui
+  - Lucide
+repository: https://github.com/hern-n/neuratek_web.git
+homepage: https://www.neuratek.ai
+tags:
+  - web
+  - ai
+  - nextjs
+  - react
+  - typescript
+  - tailwindcss
+  - ui
+lastModified: '2026-06-16T15:36:23.239Z'
